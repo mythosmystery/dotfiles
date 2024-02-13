@@ -17,7 +17,7 @@ mod4 + shift + {q,r}
 	bspc {quit,wm -r}
 
 # close and kill
-mod4 + c
+mod4 + shift + q
 	bspc node -c
 	
 # alternate between the tiled and monocle layout
@@ -86,11 +86,9 @@ mod4 + ctrl + shift + space
 mod4 + Return
 	alacritty
 mod4 + shift + Return
-	~/.local/bin/launcher
+  rofi -show drun
 mod4 + shift + x 
 	~/.local/bin/powermenu
-mod4 + shift + c
-	code
 mod4 + shift + b
 	google-chrome-stable
 mod4 + shift + t
