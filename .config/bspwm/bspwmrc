@@ -1,0 +1,72 @@
+#! /bin/sh
+# A customized bspwmrc for the bspwm window manager.
+# https://github.com/baskerville/sxhkd
+# https://github.com/baskerville/bspwm
+
+#SYSTEM STUFF
+xrdb ~/.Xresources
+xsetroot -cursor_name left_ptr
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+#### AUTOSTART ####
+sxhkd -c "$HOME/.config/sxhkd/sxhkdrc" &
+picom -f &
+~/.fehbg &
+./.config/polybar/launch.sh 
+plank &
+dunst &
+volumeicon &
+cbatticon &
+nm-applet &
+
+#### MONITORS ####
+bspc monitor DisplayPort-0 -d 0 1 2 3 4 5 6 7 8 9
+bspc monitor DisplayPort-2 -d 0 1 2 3 4 5 6 7 8 9
+bspc monitor DVI-D-1 -d 0 1 2 3 4 5 6 7 8 9
+bspc monitor LVDS1 -d 0 1 2 3 4 5
+
+#### BSPWM configuration ####
+#bspc config border_radius                8
+bspc config border_width                  2
+bspc config window_gap                    10
+bspc config top_padding                   20
+bspc config bottom_padding                0
+bspc config left_padding                  0
+bspc config right_padding                 0
+bspc config single_monocle                false
+bspc config click_to_focus                true
+bspc config split_ratio                   0.50
+bspc config borderless_monocle            true
+bspc config gapless_monocle               true
+bspc config focus_by_distance             true
+bspc config focus_follows_pointer         true
+bspc config history_aware_focus           true
+bspc config remove_disabled_monitors      true
+bspc config merge_overlapping_monitors    true
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_side
+bspc config pointer_action3 resize_corner
+
+#### BSPWM coloring ####
+bspc config normal_border_color		      "#676e95"
+bspc config active_border_color	          "#676e95"
+bspc config focused_border_color	      "#c972ea"
+bspc config presel_feedback_color	      "#c972ea"
+bspc config urgent_border_color 	      "#dd2727"
+
+bspc rule -a Gimp desktop='^6' state=floating follow=on
+bspc rule -a Google-chrome desktop='^2' follow=on
+bspc rule -a Thunar desktop='^3' follow=on
+bspc rule -a Code desktop='^5' follow=on
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+bspc rule -a reaper state=floating
+bspc rule -a "VirtualBox Manager" state=floating
+bspc rule -a Lxappearance state=floating
+bspc rule -a Dconf-editor state=floating
+bspc rule -a qBittorrent state=floating
+bspc rule -a qt5ct state=floating
+bspc rule -a Nm-connection-editor state=floating
+bspc rule -a Plank layer=above manage=on border=off
+bspc rule -a Nitrogen state=floating
+bspc rule -a Pavuacontrol state=floating

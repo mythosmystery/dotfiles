@@ -1,0 +1,114 @@
+# A customized sxhkdrc for the bspwm window manager.
+# https://github.com/baskerville/sxhkd
+# https://github.com/baskerville/bspwm
+
+
+# WM INDEPENDENT KEYBINDINGS
+
+# make sxhkd reload its configuration files:
+mod4 + Escape
+	pkill -USR1 -x sxhkd
+
+
+# BSPWM HOTKEYS
+
+# quit/restart bspwm
+mod4 + shift + {q,r}
+	bspc {quit,wm -r}
+
+# close and kill
+mod4 + c
+	bspc node -c
+	
+# alternate between the tiled and monocle layout
+mod4 + m
+	bspc desktop -l next
+
+
+# swap the current node and the biggest node
+mod4 + g
+	bspc node -s biggest
+
+
+# STATE/FLAGS
+
+# set the window state
+mod4 + {t,f,shift + f}
+	bspc node -t {tiled,floating,fullscreen}
+
+
+# FOCUS/SWAP
+
+# focus the node in the given direction
+mod4 + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east} 
+
+# focus the next/previous node in the current desktop
+mod4 + {_,shift + }n
+	bspc node -f {next,prev}.local
+
+# focus the next/previous desktop in the current monitor
+mod4 + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+mod4 + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus or send to the given desktop
+mod4 + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} focused:'^{1-9,10}'
+
+
+# PRESELECT
+
+# preselect the direction
+mod4 + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+mod4 + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+mod4 + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+mod4 + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+
+
+# APPLICATION KEYBINDINGS (mod4 + Alt + Key)
+
+# terminal emulator
+mod4 + Return
+	alacritty
+mod4 + shift + Return
+	~/.local/bin/launcher
+mod4 + shift + x 
+	~/.local/bin/powermenu
+mod4 + shift + c
+	code
+mod4 + shift + b
+	google-chrome-stable
+mod4 + shift + t
+	thunar 
+
+# SYSTEM KEYBINDINGS
+
+XF86MonBrightnessUp
+	blight set +3%
+XF86MonBrightnessDown
+	blight set -3%
+XF86AudioRaiseVolume
+	amixer -q set Master 5%+ unmute
+XF86AudioLowerVolume
+	amixer -q set Master 5%- unmute
+XF86AudioMute
+	amixer -q set Master toggle
+Print
+	gnome-screenshot -i
+mod4 + Print
+	gnome-screenshot -a
