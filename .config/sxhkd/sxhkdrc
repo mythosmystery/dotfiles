@@ -6,76 +6,76 @@
 # WM INDEPENDENT KEYBINDINGS
 
 # make sxhkd reload its configuration files:
-mod4 + Escape
+mod1 + Escape
 	pkill -USR1 -x sxhkd
 
 
 # BSPWM HOTKEYS
 
 # quit/restart bspwm
-mod4 + shift + {q,r}
+mod1 + shift + {q,r}
 	bspc {quit,wm -r}
 
 # close and kill
-mod4 + shift + q
+mod1 + shift + q
 	bspc node -c
 	
 # alternate between the tiled and monocle layout
-mod4 + m
+mod1 + m
 	bspc desktop -l next
 
 
 # swap the current node and the biggest node
-mod4 + g
+mod1 + g
 	bspc node -s biggest
 
 
 # STATE/FLAGS
 
 # set the window state
-mod4 + {t,f,shift + f}
+mod1 + {t,f,shift + f}
 	bspc node -t {tiled,floating,fullscreen}
 
 
 # FOCUS/SWAP
 
 # focus the node in the given direction
-mod4 + {_,shift + }{h,j,k,l}
+mod1 + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east} 
 
 # focus the next/previous node in the current desktop
-mod4 + {_,shift + }n
+mod1 + {_,shift + }n
 	bspc node -f {next,prev}.local
 
 # focus the next/previous desktop in the current monitor
-mod4 + bracket{left,right}
+mod1 + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
-mod4 + {grave,Tab}
+mod1 + {grave,Tab}
 	bspc {node,desktop} -f last
 
 # focus or send to the given desktop
-mod4 + {_,shift + }{1-9,0}
+mod1 + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} focused:'^{1-9,10}'
 
 
 # PRESELECT
 
 # preselect the direction
-mod4 + ctrl + {h,j,k,l}
+mod1 + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
-mod4 + ctrl + {1-9}
+mod1 + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
-mod4 + ctrl + space
+mod1 + ctrl + space
 	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
-mod4 + ctrl + shift + space
+mod1 + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 
@@ -83,15 +83,15 @@ mod4 + ctrl + shift + space
 # APPLICATION KEYBINDINGS (mod4 + Alt + Key)
 
 # terminal emulator
-mod4 + Return
+mod1 + Return
 	alacritty
-mod4 + shift + Return
+mod1 + shift + Return
   rofi -show drun
-mod4 + shift + x 
+mod1 + shift + x 
 	~/.local/bin/powermenu
-mod4 + shift + b
+mod1 + shift + b
 	google-chrome-stable
-mod4 + shift + t
+mod1 + shift + t
 	thunar 
 
 # SYSTEM KEYBINDINGS
@@ -108,5 +108,5 @@ XF86AudioMute
 	amixer -q set Master toggle
 Print
 	gnome-screenshot -i
-mod4 + Print
+mod1 + Print
 	gnome-screenshot -a
