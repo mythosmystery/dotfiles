@@ -18,7 +18,7 @@ nnoremap <leader>q :q<CR>
 
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
-nnoremap <C-y> :noh<CR>
+nnoremap <ESC> :noh<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
