@@ -30,13 +30,13 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 Plug 'nanotee/zoxide.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-repeat'
 
 call plug#end()
 
@@ -50,13 +50,14 @@ set expandtab
 set mouse=a
 set incsearch
 set hlsearch
-set wrap
 set showcmd
 set scrolloff=8
 set termguicolors
+set encoding=UTF-8
 
 let g:tokyonight_style = 'storm' " available: night, storm
 let g:tokyonight_enable_italic = 1
+let g:netrw_liststyle = 3
 
 colorscheme tokyonight
 
@@ -64,9 +65,11 @@ colorscheme tokyonight
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader><leader> :GFiles<CR>
-nnoremap <leader>fg :Rg<CR>
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :Rg<CR>
 nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>gc :Commits<CR>
+nnoremap <leader>f\ :BLines<CR>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j

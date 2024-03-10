@@ -1,16 +1,45 @@
-export PATH=$PATH:$HOME/.cargo/bin
-export TERM='xterm-256color'
-export EDITOR=nvim
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH:$(go env GOPATH)/bin
+
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+bindkey -v
 
-alias c=clear
-alias ls=exa
-alias la="ls -la"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# bun completions
+[ -s "/Users/hunterbarton/.bun/_bun" ] && source "/Users/hunterbarton/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+
+alias c=clear
+alias ls="exa --icons"
+alias la="exa -la --icons"
+alias ll="exa -l --icons"
+alias n="nvim ."
+alias nj="git rev-parse --abbrev-ref HEAD | xargs nvim"
+alias ncfg="cd ~/.config/nvim && nvim ."
+alias pip="pip3"
+alias python="python3"
+alias tree="exa --tree"
+alias ff="fd -t f -H -d 5 -E .git -E node_modules | fzf --preview 'bat --color=always {}' --preview-window=right:70%:wrap --bind '?:toggle-preview' | xargs nvim"
+alias ffd="fd -t d -H -d 1 -E .git -E node_modules | fzf --preview 'exa -l --color=always {}' --preview-window=right:70%:wrap --bind '?:toggle-preview' | xargs nvim"
+alias fcd='cd $(fd . -t d --maxdepth 1 | fzf --preview "exa -l --color=always {}")'
+alias fp='cd $(fd . ~/Documents/GitHub -t d --maxdepth 1 | fzf --preview "exa -l --color=always {}")'
+alias fb='cd $(fd . ~/Documents/GitHub/bonfire -t d --maxdepth 1 | fzf --preview "exa -l --color=always {}")'
+alias gbr='git for-each-ref --sort=-committerdate refs/remotes/origin --format="%(refname:short)" | fzf --preview "git diff origin/main...{} | bat --color=always" --header "Search Recent Branches" | cut -d"/" -f2- | xargs git checkout'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
