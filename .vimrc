@@ -68,10 +68,10 @@ nnoremap <leader>fg :Rg<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 
-nnoremap <C-l> <C-w>l
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
 nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 nnoremap <C-p> :bp<CR>
 nnoremap <C-n> :bn<CR>
