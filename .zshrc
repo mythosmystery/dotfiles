@@ -20,6 +20,14 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
+function brewq {
+  brew list | fzf --preview 'brew info {}' --preview-window=right:70%:wrap | xargs brew info
+}
+
+function brews {
+  { brew formulae; brew casks } | fzf --preview 'brew info {}' --preview-window=right:70%:wrap | xargs brew install
+}
+
 alias c=clear
 alias ls="exa --icons"
 alias la="exa -la --icons"
