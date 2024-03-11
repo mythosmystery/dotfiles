@@ -14,3 +14,8 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+
+function pacs {
+  pacman -Ss $@ | awk '!/^ /' | cut -d '/' -f 2 | cut -d ' ' -f 1 | fzf --preview="echo {} | xargs pacman -Si" 
+}
