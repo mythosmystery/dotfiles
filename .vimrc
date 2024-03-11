@@ -1,24 +1,17 @@
 function! InstallVimPlug()
     " Define the path to the vim-plug plugin file depending on the environment
-    if has('unix')
-        let plugPath = '~/.vim/autoload/plug.vim'
-    elseif has('win32') || has('win64')
-        let plugPath = '~/vimfiles/autoload/plug.vim'
-    endif
+" Determine the appropriate path for vim-plug depending on the operating system
+  if has('unix')
+    let plugPath = expand('~/.vim/autoload/plug.vim')
+  elseif has('win32') || has('win64')
+    let plugPath = expand('~/vimfiles/autoload/plug.vim')
+  endif
 
-    " Check if vim-plug is installed by checking for the existence of plug.vim
-    if !filereadable(expand(plugPath))
-        " If not installed, display a message
-        echo "vim-plug not found. Installing..."
-        " Define the installation command for vim-plug
-        let installCmd = 'curl -fLo ' . plugPath . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  " Form the complete curl command ensuring the plugPath is correctly escaped
+  let installCmd = 'curl -fLo ' . shellescape(plugPath) . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-        " Execute the installation command
-        silent !execute installCmd
-
-        " Display a message upon completion
-        echo "vim-plug installed."
-    endif
+  " Execute the curl command to download vim-plug
+  execute 'silent !' . installCmd
 endfunction
 
 " Call the function when Vim starts
@@ -49,6 +42,7 @@ set shiftwidth=2
 set expandtab
 set mouse=a
 set incsearch
+set nowrap
 set hlsearch
 set showcmd
 set scrolloff=8
@@ -61,6 +55,7 @@ let g:netrw_liststyle = 3
 
 colorscheme tokyonight
 
+command! Sync call PlugInstall() | execute 'colorscheme tokyonight'
 
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
