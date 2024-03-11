@@ -17,5 +17,5 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
 function pacs {
-  pacman -Ss $@ | awk '!/^ /' | cut -d '/' -f 2 | cut -d ' ' -f 1 | fzf --preview="echo {} | xargs pacman -Si" 
+  pacman -Ss $@ | awk '!/^ /' | cut -d '/' -f 2 | cut -d ' ' -f 1 | fzf --preview="echo {} | xargs pacman -Si" | sudo pacman -S
 }
