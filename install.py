@@ -3,9 +3,17 @@
 import sys
 import os
 
-distro = sys.argv[1] or "ubuntu"
+distro = sys.argv[1] if len(sys.argv) > 1 else  "ubuntu"
 
-def get_install_command():
+has_brew = False
+
+package_override = {
+    "ubuntu": {
+        "rustup": "snap install --classic"
+    }
+}
+
+def get_distro_install(distro):
     match distro:
         case "opensuse":
             return "zypper install -y"
@@ -14,10 +22,33 @@ def get_install_command():
     return "apt install -y" 
 
 def install(packages):
-    print(f"Installing: {packages}") 
-    os.system(f"sudo {get_install_command()} {packages}")
+    install_commands = {
+        f"{get_distro_install(distro)}": []
+    }
+
+    print(f"Installing: {' '.join(packages)}") 
+
+    if not package_override.__contains__(distro): 
+        os.system(f"sudo {get_distro_install(distro)} {' '.join(packages)}")
+        return
+
+    for package_name in packages:
+        if package_override[distro].__contains__(package_name):
+            install_command = package_override[distro][package_name]
+            if install_commands.__contains__(install_command):
+                install_commands[install_command].append(package_name)
+            else:
+                install_commands[install_command] = [package_name]
+        else:
+            install_commands[get_distro_install(distro)].append(package_name)
+
+    print(install_commands)
+
+    
+
 
 
 if __name__ == "__main__":
-    install("git rustup")
-    os.system("rustup default stable")
+    install(["git","rustup"])
+    # print(os.system("rustup default stable"))
+    
