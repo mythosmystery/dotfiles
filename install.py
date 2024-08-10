@@ -42,13 +42,14 @@ def install(packages):
         else:
             install_commands[get_distro_install(distro)].append(package_name)
 
-    print(install_commands)
+    for command in install_commands.keys():
+        print(f"sudo {command} {' '.join(install_commands[command])}")
 
     
 
 
 
 if __name__ == "__main__":
-    install(["git","rustup"])
+    install(["git","rustup", "lua", "moreutils"])
     # print(os.system("rustup default stable"))
     
