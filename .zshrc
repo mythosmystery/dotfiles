@@ -7,8 +7,6 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
 alias c=clear
 alias ls=exa
 alias la="ls -la"
@@ -22,8 +20,6 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
 eval "$(direnv hook zsh)"
-
-export PATH="/home/linuxbrew/.linuxbrew/opt/rustup/bin:$PATH"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
